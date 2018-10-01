@@ -22,14 +22,14 @@ nltk.download()
 This will open a dialog box. Select the 'all' option and click on download.
 
 ## Training the model
-'''
+```
 python train.py
-'''
+```
 
 ## Running the tests
-'''
+```
 python GUI.py
-'''
+```
 
 ## Example
 ![restaurantreview](https://user-images.githubusercontent.com/20324385/46272241-c579c880-c56d-11e8-8570-9cfe3f276383.JPG)
