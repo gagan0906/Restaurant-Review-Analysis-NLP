@@ -31,23 +31,22 @@ class window(QMainWindow):
 
       def initialize(self):
             self.setFixedSize(600,400)
-            self.setWindowTitle = self.title
+            self.setWindowTitle(self.title)
             label = QLabel("Write your review",self)
             label.move(20,10)
 
             calculateReview = QPushButton("Compute Review",self)
-            calculateReview.move(500,300)
+            calculateReview.move(450,300)
             calculateReview.clicked.connect(self.process)
 
             
       def input(self):
-            text = QPlainTextEdit(self)
-            text.move(20,40)
-            text.resize(400,200)  
-            #self.review = QPlainTextEdit.toPlainText
-             
+            self.text = QPlainTextEdit(self)
+            self.text.move(20,40)
+            self.text.resize(400,200)   
 
       def process(self):
+            self.review = self.text.toPlainText() 
             review = re.sub('[^a-zA-Z]',' ',self.review)
             lemmatizer = WordNetLemmatizer()
 
@@ -55,16 +54,20 @@ class window(QMainWindow):
             review = ''.join(review)
            
             li = [review] 
-            print(type(li))
-            
-            
-            #cv= CountVectorizer(max_features=1200)
-            
-                        
             
             res = tfidf.transform(li)
             res = model.predict(res)
-            print(res)
+            res = res[0]
+            if(res == 1):
+                  label = QLabel("Positive Review",self)
+                  label.move(180,250)
+                  label.show()
+
+            else:
+                  label = QLabel("Negative Review",self)
+                  label.move(180,250)
+                  label.show()
+            
             
 
 
