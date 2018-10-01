@@ -2,7 +2,8 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import pandas as pd
-from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+#from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.feature_extraction.text import TfidfVectorizer
 import re
 df = pd.read_csv('Restaurant_Reviews.tsv',delimiter = '\t')
 
@@ -24,14 +25,20 @@ for i in range(0,1000):
       review = ' '.join(review)   
       corpus.append(review)  
 
-
-vectorizer = CountVectorizer(max_features=1200,)
+'''
+vectorizer = CountVectorizer(max_features=1200)
 X= vectorizer.fit_transform(corpus).toarray()
-y= df.iloc[:,1].values
+'''
 
+tfidf = TfidfVectorizer(max_features=1200)
+X = tfidf.fit_transform(corpus).toarray()
+
+'''
 tfidf = TfidfTransformer()
 X = tfidf.fit_transform(X)
+'''
 
+y= df.iloc[:,1].values
 
 from sklearn.cross_validation import train_test_split 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25) 
@@ -54,10 +61,13 @@ import pickle
 with open('model.pickle','wb') as f:
       pickle.dump(classifier,f)
       
-with open('countVector.pickle','wb') as f:
-      pickle.dump(CountVectorizer,f)
-      
-with open('tfidf.pickle','wb') as f:
+with open('tfidfCV.pickle','wb') as f:
       pickle.dump(tfidf,f)
+      
+#with open('countVector.pickle','wb') as f:
+#      pickle.dump(CountVectorizer,f)
+      
+#with open('tfidf.pickle','wb') as f:
+#      pickle.dump(tfidf,f)
       
 

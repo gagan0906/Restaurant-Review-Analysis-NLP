@@ -7,13 +7,16 @@ from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 with open('model.pickle','rb') as f:
       model = pickle.load(f)
-
+'''
 with open('countVector.pickle','rb') as f:
       cv = pickle.load(f)
       
 with open('tfidf.pickle','rb') as f:
       tfidf = pickle.load(f)      
-      
+'''
+
+with open('tfidfCV.pickle','rb') as f:
+      tfidf = pickle.load(f)      
         
 
 
@@ -21,7 +24,7 @@ class window(QMainWindow):
       def __init__(self):
             super().__init__()
             self.title = "Restaurant Reviews"
-            self.review = 'This is a very good restaurant'
+            self.review = 'Food is not very good here'
             self.initialize()
             self.input()
             self.show()
@@ -59,10 +62,9 @@ class window(QMainWindow):
             
                         
             
-            res = cv.transform(review)
-            #print(res)
-            #res = model.predict(res)
-            #print(res)
+            res = tfidf.transform(li)
+            res = model.predict(res)
+            print(res)
             
 
 
