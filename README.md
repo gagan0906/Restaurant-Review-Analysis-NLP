@@ -2,10 +2,6 @@
 
 The model of the project has been trained on a restaurant dataset. This dataset has 2 columns. First column contains the reviews given by the customers and second column contains categorical value for positive or negative review.
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
 ### Prerequisites
 
 Just open windows commandpad or the anaconda prompt and type the following commands.
